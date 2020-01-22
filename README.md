@@ -6,13 +6,13 @@ Flashcards webapp
 
 Most of the following scripts require [rlwrap](http://utopia.knoware.nl/~hlub/uck/rlwrap/) (on OS X installable via brew).
 
-Build your project once in dev mode with the following script and then open `index.html` in your browser.
-
-    ./scripts/build
-
-To auto build your project in dev mode:
+To auto build your project in dev mode
 
     ./scripts/watch
+
+and then open `index.html` in your browser.  To release
+
+    ./scripts/release
 
 ## License
 

@@ -5,19 +5,43 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   </head>
   <body>
-    <div id="div0"></div>
-    <div id="div1"></div>
-    <script>
-      const fileName = 'flashcards.txt';
+    <div id="div0">
+      <button onClick="flashcards.event.download()">
+        Download
+      </button>
+      <input
+             type="file"
+             onChange="upload()"
+             value="Upload"
+             id="upload"
+             />
+      <table id="table"></table>
+      <div>
+        <button onClick="flashcards.event.save()">
+          Save
+        </button>
+      </div>
+      <textarea id="textarea" cols="100" rows="50"></textarea>
+    </div>
+    </div>
+  <div id="div1"></div>
+  <script>
+    const fileName = 'flashcards.txt';
 
-      const download = fileContent => {
-        const blob = new Blob([fileContent], { type: 'text/plain' });
-        const a = document.createElement('a');
-        a.setAttribute('download', fileName);
-        a.setAttribute('href', window.URL.createObjectURL(blob));
-        a.click();
-      };
-    </script>
-    <script src="out/flashcards.js" type="text/javascript"></script>
+    const download = fileContent => {
+      const blob = new Blob([fileContent], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.setAttribute('download', fileName);
+      a.setAttribute('href', window.URL.createObjectURL(blob));
+      a.click();
+    };
+
+    const upload = () => {
+      const reader = new FileReader();
+      reader.onload = () => flashcards.event.upload(reader.result);
+      reader.readAsText(document.getElementById('upload').files[0]);
+    };
+  </script>
+  <script src="out/flashcards.js" type="text/javascript"></script>
   </body>
 </html>

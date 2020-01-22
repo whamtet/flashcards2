@@ -1,6 +1,7 @@
 (ns flashcards.storage
   (:refer-clojure :exclude [assoc dissoc])
-  (:require [alandipert.storage-atom :refer [local-storage]]))
+  (:require [alandipert.storage-atom :refer [local-storage]]
+            [cljs.reader :refer [read-string]]))
 
 (def storage (local-storage (atom {}) :storage))
 
@@ -10,5 +11,7 @@
 (defn dissoc [k]
   (swap! storage cljs.core/dissoc k))
 
-(defn download []
-  (-> @storage pr-str js/download))
+(defn upload [x]
+  (reset! storage (read-string x)))
+
+(prn 'storage @storage)

@@ -12,6 +12,6 @@
   (swap! storage cljs.core/dissoc k))
 
 (defn upload [x]
-  (reset! storage (read-string x)))
+  (swap! storage merge (read-string x)))
 
 (prn 'storage @storage)

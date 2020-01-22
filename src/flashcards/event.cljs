@@ -36,3 +36,6 @@
 (defn ^:export delete [k]
   (storage/dissoc k)
   (render/table))
+
+(defn ^:export clear []
+  (render/edit ""))

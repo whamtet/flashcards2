@@ -11,7 +11,7 @@
 
 (defn- row [[x srcs]]
   [:tr
-   (td #(js/flashcards.event.start-play x) (str x " (" (count srcs) ")"))
+   (td #(js/flashcards.event.start-play x) (str x " (" (count srcs) " pics)"))
    (td #(js/flashcards.event.edit x) "Edit")
    (td #(js/flashcards.event.delete x) "X")])
 

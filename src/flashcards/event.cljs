@@ -2,6 +2,7 @@
   (:require
     [flashcards.storage :as storage]
     [flashcards.render :as render]
+    [flashcards.event.play :as play]
     [clojure.string :as string]))
 
 (defn ^:export upload [x]
@@ -20,5 +21,18 @@
   (let [[k & srcs] (-> "textarea" render/value .trim (.split "\n"))]
     (when (not-empty srcs)
       (storage/assoc k srcs)
-      (prn 'storage @storage/storage)
-      (render/table))))
+      (render/table)
+      (render/edit ""))))
+
+(defn ^:export start-play [k]
+  (let [pics (@storage/storage k)]
+    (when (> (count pics) 1)
+      (let [shuffled (shuffle (range (count pics)))]
+        (reset! play/to-play (partition 2 1 shuffled))
+        (render/start)
+        (render/pics k)
+        (render/show-pic (first shuffled) true)))))
+
+(defn ^:export delete [k]
+  (storage/dissoc k)
+  (render/table))

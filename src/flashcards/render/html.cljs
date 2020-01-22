@@ -11,9 +11,9 @@
 
 (defn- row [[x srcs]]
   [:tr
-   (td js/console.log (str x " (" (count srcs) ")"))
+   (td #(js/flashcards.event.start-play x) (str x " (" (count srcs) ")"))
    (td #(js/flashcards.event.edit x) "Edit")
-   (td js/console.log "X")])
+   (td #(js/flashcards.event.delete x) "X")])
 
 (defn table []
   (crate/html
@@ -21,8 +21,13 @@
      [:tbody
       (map row @storage/storage)]]))
 
+(defn pic [i src]
+  [:img {:id (str "pic" i)
+         :src src
+         :style "display: none"
+         :onclick js/flashcards.event.play.play}])
+
 (defn pics [k]
   (crate/html
     [:div#div1
-     (for [src (@storage/storage k)]
-       [:img {:src src :style "display: none"}])]))
+     (map-indexed pic (@storage/storage k))]))

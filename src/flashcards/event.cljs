@@ -34,8 +34,9 @@
         (render/show-pic (first shuffled) true)))))
 
 (defn ^:export delete [k]
-  (storage/dissoc k)
-  (render/table))
+  (when (js/confirm (str "Delete " k "?"))
+    (storage/dissoc k)
+    (render/table)))
 
 (defn ^:export clear []
   (render/edit ""))

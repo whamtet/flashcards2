@@ -7,7 +7,7 @@
   [:a {:href "javascript: void(0)" :onclick onclick} body])
 
 (defn- td [onclick & body]
-  [:td (a onclick body)])
+  [:td {:style "padding: 5px"} (a onclick body)])
 
 (defn- row [[x srcs]]
   [:tr

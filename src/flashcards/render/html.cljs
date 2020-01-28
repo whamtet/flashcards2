@@ -22,10 +22,15 @@
       (map row @storage/storage)]]))
 
 (defn pic [i src]
-  [:img {:id (str "pic" i)
-         :src src
-         :style "display: none"
-         :onclick js/flashcards.event.play.play}])
+  (if (.startsWith src "http")
+    [:img {:id (str "pic" i)
+           :src src
+           :style "display: none"
+           :onclick js/flashcards.event.play.play}]
+    [:h1 {:id (str "pic" i)
+          :style "display: none"
+          :onclick js/flashcards.event.play.play}
+     src]))
 
 (defn pics [k]
   (crate/html

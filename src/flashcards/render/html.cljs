@@ -22,7 +22,9 @@
       (map row @storage/storage)]]))
 
 (defn pic [i src]
-  (if (.startsWith src "http")
+  (if (or
+        (.startsWith src "http")
+        (.startsWith src "data:"))
     [:img {:id (str "pic" i)
            :src src
            :style "display: none"

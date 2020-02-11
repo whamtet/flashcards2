@@ -19,7 +19,9 @@
   (crate/html
     [:table#table
      [:tbody
-      (map row @storage/storage)]]))
+      (->> @storage/storage
+           (sort-by #(-> % first .toLowerCase))
+           (map row))]]))
 
 (defn pic [i src]
   (if (or

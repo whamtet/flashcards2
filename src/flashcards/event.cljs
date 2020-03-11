@@ -25,11 +25,11 @@
       (render/edit ""))))
 
 (defn ^:export start-play [k]
-  (let [pics (@storage/storage k)]
+  (let [pics (vec (@storage/storage k))]
     (when (> (count pics) 1)
       (let [shuffled (shuffle (range (count pics)))]
         (reset! play/to-play (partition 2 1 shuffled))
-        (reset! play/to-show (map #(nth pics %) shuffled))
+        (reset! play/to-show (map pics shuffled))
         (render/start)
         (render/pics k)
         (render/show-pic (first shuffled) true)))))

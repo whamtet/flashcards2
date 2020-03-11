@@ -15,6 +15,6 @@
 
 (defn ^:export play-entry [i]
   (let [entry (-> (str "entry" i) js/document.getElementById .-value)
-        expected (some-> @to-show first (.split ";") .trim second)]
+        expected (some-> @to-show first (.split ";") second .trim)]
     (when (= entry expected)
       (play))))

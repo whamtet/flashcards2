@@ -35,11 +35,14 @@
            :style "display: none"}
      [:h1 {:onclick js/flashcards.event.play.play}
       (-> src (.split ";") first)]
-     [:input {:type "text"
-              :id (str "entry" i)}]
+     #_[:input {:type "text"
+                :id (str "entry" i)}]
+     #_[:button {:type "button"
+                 :onclick #(js/flashcards.event.play.play-entry i)}
+        "Next"]
      [:button {:type "button"
-               :onclick #(js/flashcards.event.play.play-entry i)}
-      "Next"]]))
+               :onclick #(js/speakThai src)}
+      "Speak"]]))
 
 (defn pics [k]
   (crate/html

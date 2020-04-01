@@ -44,6 +44,18 @@
       reader.onload = () => flashcards.event.upload(reader.result);
       reader.readAsText(document.getElementById('upload').files[0]);
     };
+
+    const voices = window.speechSynthesis.getVoices();
+    const thaiVoice = voices.find(x => x.lang === 'th-TH');
+
+    const speakThai = (s) => {
+      const msg = new SpeechSynthesisUtterance();
+      msg.voiceURI = 'native'; //ตัวนี้บอกว่ามันจะใช้ตัวสังเคาะห์ภายใน (แปลว่าอะไรไม่รู้แต่มันจะสามารถใช้ได้โดยไม่มีการเชื่อมต่อเน็ตก็ตาม)
+      msg.text = s
+      msg.lang = 'th-TH'; // ภาษา
+      msg.voice = thaiVoice;
+      speechSynthesis.speak(msg);
+    };
   </script>
   <script src="out/flashcards.js" type="text/javascript"></script>
   </body>
